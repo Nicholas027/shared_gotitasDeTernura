@@ -15,7 +15,6 @@ const app = express();
 //database connection setup
 const mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
-const mongoURI = "mongodb://localhost:27017/Consultorio";
 
 // connection
 const conn = mongoose.createConnection(
@@ -38,7 +37,7 @@ conn.once("open", () => {
 });
 // Storage
 const storage = new GridFsStorage({
-  url: mongoURI,
+  url: process.env.MONGO_URI,
   file: (req, file) => {
     console.log("inside storage");
     return new Promise((resolve, reject) => {
